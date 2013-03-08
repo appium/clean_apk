@@ -1,0 +1,9 @@
+.settings
+.swp
+assets/
+bin/
+gen/
+*.log
+libs/
+res/
+.DS_Store
