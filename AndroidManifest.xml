@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="clean.apk"
+    package="clean.pkg"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,6 +9,6 @@
 
     <instrumentation
         android:name="clean.apk.Clean"
-        android:targetPackage="target" />
+        android:targetPackage="target.pkg" />
 
 </manifest>
