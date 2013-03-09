@@ -1,11 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="clean.pkg"
+    package="target.pkg.clean"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="5"
         android:targetSdkVersion="17" />
+
+    <application android:allowBackup="true">
+        <uses-library android:name="android.test.runner" />
+    </application>
 
     <instrumentation
         android:name="clean.apk.Clean"
