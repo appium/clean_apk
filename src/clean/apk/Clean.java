@@ -22,6 +22,7 @@ import android.test.InstrumentationTestRunner;
 
 public final class Clean extends InstrumentationTestRunner {
 
+  // remove account requires API level 5
   // https://github.com/calabash/calabash-android/pull/161
   private void removeAccounts() {
     // catch android.database.sqlite.SQLiteException: cannot rollback
@@ -62,13 +63,13 @@ public final class Clean extends InstrumentationTestRunner {
     }
   }
 
-  private void removeExternal() {
+  private void removeExternal() { // API level 8 required
     final File external = getTargetContext().getExternalCacheDir();
     // Remove all external, not just the cache dir.
     removeParent(external);
   }
 
-  private void removeInternal() {
+  private void removeInternal() { // API level 1
     final File internal = getTargetContext().getCacheDir();
     // Remove all internal, not just the cache dir.
     removeParent(internal);
