@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="target.pkg.clean"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="clean.apk"
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -11,10 +11,19 @@
 
     <application android:allowBackup="true">
         <uses-library android:name="android.test.runner" />
+        <activity
+              android:name="clean.apk.Unlock"
+              android:label="Unlock"
+              android:exported="true"
+              android:launchMode="singleInstance"
+              android:finishOnTaskLaunch="true"
+              android:stateNotNeeded="true"
+              android:noHistory="false"
+              android:excludeFromRecents="true"/>
     </application>
 
     <instrumentation
         android:name="clean.apk.Clean"
-        android:targetPackage="target.pkg" />
+        android:targetPackage="clean.apk" />
 
 </manifest>
