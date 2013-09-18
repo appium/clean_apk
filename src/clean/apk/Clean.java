@@ -14,6 +14,7 @@
 package clean.apk;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -32,7 +33,7 @@ public final class Clean extends InstrumentationTestRunner {
       for (final Account account : m.getAccounts()) {
         // catch lack of MANAGE_ACCOUNT permission
         try {
-          m.removeAccount(account, null, null);
+          m.removeAccount(account, null, null).getResult(20L, TimeUnit.SECONDS);;
         } catch (final Exception e) {
         }
       }
