@@ -60,8 +60,9 @@ public final class Clean extends InstrumentationTestRunner {
   }
 
   private static void d(final String msg) {
-    if (msg == null)
+    if (msg == null) {
       return;
+    }
     Log.d("clean.apk", msg);
   }
 
