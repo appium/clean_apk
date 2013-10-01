@@ -16,3 +16,11 @@ To build, use the export option in Eclipse.
     $ ant debug
 
 You should now have a `clean_apk-debug.apk` under the `bin/` directory.
+
+## Notes
+
+Clean APK uses [Instrumentation](http://developer.android.com/reference/android/app/Instrumentation.html)
+which means the app process will be running when the data is cleared. The running process pid is the same process
+that the Instrumentation is in.
+
+Some apps may have issues with data being removed when the app is running.
