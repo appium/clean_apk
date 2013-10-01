@@ -1,15 +1,15 @@
 /**
- * This file is released under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance with the
- * License.  You may obtain a copy of the License at
- *
+ * This file is released under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
- * License for the specific language governing permissions and limitations
- * under the License.
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  **/
 package clean.apk;
 
@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.os.Bundle;
 import android.test.InstrumentationTestRunner;
+import android.util.Log;
 
 public final class Clean extends InstrumentationTestRunner {
 
@@ -33,7 +34,7 @@ public final class Clean extends InstrumentationTestRunner {
       for (final Account account : m.getAccounts()) {
         // catch lack of MANAGE_ACCOUNT permission
         try {
-          m.removeAccount(account, null, null).getResult(20L, TimeUnit.SECONDS);;
+          m.removeAccount(account, null, null).getResult(20L, TimeUnit.SECONDS);
         } catch (final Exception e) {
         }
       }
@@ -58,14 +59,22 @@ public final class Clean extends InstrumentationTestRunner {
     file.delete();
   }
 
+  private static void d(final String msg) {
+    if (msg == null)
+      return;
+    Log.d("clean.apk", msg);
+  }
+
   private static void removeParent(final File file) {
     if (file != null) {
       for (final File f : file.getParentFile().listFiles()) {
         // lib contains .so files which must not be removed.
         // Fix https://github.com/appium/clean_apk/issues/6
         if (f.isDirectory() && f.getName().contentEquals("lib")) {
+          d("Found lib, keeping.");
           continue;
         }
+        d("Deleting: " + f.getName());
         deleteRecursively(f);
       }
     }
@@ -84,8 +93,12 @@ public final class Clean extends InstrumentationTestRunner {
   }
 
   public void onCreate(final Bundle arguments) {
+    d("Removing accounts.");
     removeAccounts();
+    d("Removing internal data.");
     removeInternal();
+    d("Removing external data.");
     removeExternal();
+    d("Clean.apk complete!");
   }
 }
