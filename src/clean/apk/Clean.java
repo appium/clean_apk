@@ -60,7 +60,14 @@ public final class Clean extends InstrumentationTestRunner {
 
   private static void removeParent(final File file) {
     if (file != null) {
-      deleteRecursively(file.getParentFile());
+      for (final File f : file.getParentFile().listFiles()) {
+        // lib contains .so files which must not be removed.
+        // Fix https://github.com/appium/clean_apk/issues/6
+        if (f.isDirectory() && f.getName().contentEquals("lib")) {
+          continue;
+        }
+        deleteRecursively(f);
+      }
     }
   }
 
